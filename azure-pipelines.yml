@@ -25,6 +25,8 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
 
+- task: PublishBuildArtifacts@1
+
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Microsoft Azure Internal Consumption (153bf828-3e1e-48f9-8e6d-7f69c8e188aa)'
