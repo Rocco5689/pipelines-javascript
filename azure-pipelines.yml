@@ -38,7 +38,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(agent.builddirectory)/**/*.pubxml'
+    SourceFolder: '$$(Build.SourcesDirectory)/**/*.pubxml'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
