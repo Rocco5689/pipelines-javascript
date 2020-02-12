@@ -42,8 +42,8 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '**'
-    Contents: '*.pubxml'
+    SourceFolder: ''
+    Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 # - task: AzureCLI@2
