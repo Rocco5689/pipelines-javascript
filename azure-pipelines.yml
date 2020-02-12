@@ -40,11 +40,11 @@ steps:
 #    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
 #    deploymentMethod: 'zipDeploy'
 
-# - task: CopyFiles@2
-#   inputs:
-#     SourceFolder: ''
-#     Contents: '*.pubxml'
-#     TargetFolder: '$(build.artifactstagingdirectory)'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '**'
+    Contents: '*.pubxml'
+    TargetFolder: '$(build.artifactstagingdirectory)'
 
 # - task: AzureCLI@2
 #   inputs:
@@ -55,6 +55,6 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'PublishProfile'
-    PublishProfilePath: '*.pubxml'
+    PublishProfilePath: '$(build.artifactstagingdirectory)\**\*.pubxml'
     PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
-    packageForLinux: 'deploy.zip'
+    packageForLinux: '$(build.artifactstagingdirectory)\**\deploy.zip'
