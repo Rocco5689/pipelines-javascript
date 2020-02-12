@@ -10,26 +10,26 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+# - script: |
+#     npm install
+#     npm run build
+#   displayName: 'npm install and build'
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: false
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+#     includeRootFolder: false
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
 
 #- task: AzureWebApp@1
 #  inputs:
@@ -46,9 +46,15 @@ steps:
 #     Contents: '*.pubxml'
 #     TargetFolder: '$(build.artifactstagingdirectory)'
 
+# - task: AzureCLI@2
+#   inputs:
+#     ConnectionType: 'PublishProfile'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '*.pubxml'
     PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    packageForLinux: 'deploy.zip'
