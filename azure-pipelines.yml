@@ -10,20 +10,20 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+# - script: |
+#     npm install
+#     npm run build
+#   displayName: 'npm install and build'
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: false
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+#     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1
 
@@ -38,13 +38,13 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+    SourceFolder: '$(Build.SourcesDirectory)/**/*.pubxml'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'PublishProfile'
-    PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
-    PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'PublishProfile'
+#     PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+#     PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
