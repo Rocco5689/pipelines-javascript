@@ -27,11 +27,24 @@ steps:
 
 - task: PublishBuildArtifacts@1
 
-- task: AzureWebApp@1
+#- task: AzureWebApp@1
+#  inputs:
+#    azureSubscription: 'Microsoft Azure Internal Consumption (153bf828-3e1e-48f9-8e6d-7f69c8e188aa)'
+#    appType: 'webApp'
+#    appName: 'nodejsapp5601'
+#    package: '$(System.DefaultWorkingDirectory)'
+#    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
+#    deploymentMethod: 'zipDeploy'
+
+- task: CopyFiles@2
   inputs:
-    azureSubscription: 'Microsoft Azure Internal Consumption (153bf828-3e1e-48f9-8e6d-7f69c8e188aa)'
-    appType: 'webApp'
-    appName: 'nodejsapp5601'
-    package: '$(System.DefaultWorkingDirectory)'
-    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
-    deploymentMethod: 'zipDeploy'
+    SourceFolder: '$(agent.builddirectory)/**/*.pubxml'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+    PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
