@@ -51,4 +51,4 @@ steps:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '*.pubxml'
     PublishProfilePassword: 'FZw3XxsuTWhEJ1zndzpBeCbR7r8QEn6Qfolddswz6Jr4iNaP5KbeSYobD0CN'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)\**\*.zip'
